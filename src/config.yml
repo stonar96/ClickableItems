@@ -2,6 +2,13 @@
 # 
 # clickable-items:
 #   everywhere:                                                 everywhere, default
+#     commands:
+#     - command: 'say <player> clicked item <type>'
+#       permission: 'clickableitems.saywhoclickedwhat'
+#     - command: 'me clicked item <type>'
+#       permission: 'clickableitems.saywhoclickedwhat'
+#       sender: player
+#     - command: 'msg <player> You clicked item <type>'
 #     RIGHT_CLICK_AIR:
 #       enable-player-location: true
 #       enable-item-location: true
@@ -68,6 +75,13 @@
 
 clickable-items:
   everywhere:
+    commands:
+    - command: 'say <player> clicked item <type>'
+      permission: 'clickableitems.saywhoclickedwhat'
+    - command: 'me clicked item <type>'
+      permission: 'clickableitems.saywhoclickedwhat'
+      sender: player
+    - command: 'msg <player> You clicked item <type>'
     RIGHT_CLICK_AIR:
       enable-player-location: true
       enable-item-location: true

@@ -1,9 +1,10 @@
 package com.vanillage.clickableitems;
 
+import java.util.Map;
+
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -24,7 +25,7 @@ public class ClickableItems extends JavaPlugin implements Listener {
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
 		saveConfig();
-		locationConfiguration = new LocationConfiguration(getConfig().getConfigurationSection("clickable-items"));
+		locationConfiguration = new LocationConfiguration(getConfig().getConfigurationSection("clickable-items"), this);
 		getServer().getPluginManager().registerEvents(this, this);
 		getLogger().info(getDescription().getFullName() + " enabled");
 	}
@@ -36,7 +37,7 @@ public class ClickableItems extends JavaPlugin implements Listener {
 	
 	public void onReload() {
 		reloadConfig();
-		locationConfiguration = new LocationConfiguration(getConfig().getConfigurationSection("clickable-items"));
+		locationConfiguration = new LocationConfiguration(getConfig().getConfigurationSection("clickable-items"), this);
 		getLogger().info(getDescription().getFullName() + " reloaded");
 	}
 	
@@ -103,14 +104,23 @@ public class ClickableItems extends JavaPlugin implements Listener {
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerClickItem(PlayerClickItemEvent event) {
-		ConfigurationSection commandsSection = locationConfiguration.getValue(event.getItem().getLocation(), event.getEvent().getAction().name() + ".commands", ConfigurationSection.class);
-		executeCommands(commandsSection.getConfigurationSection("all"), event);
-		executeCommands(commandsSection.getConfigurationSection(event.getItem().getItemStack().getType().name()), event);
-	}
-	
-	private void executeCommands(ConfigurationSection configurationSection, PlayerClickItemEvent event) {
-		if (configurationSection != null) {
-			
+		getLogger().info(event.getPlayer().getName() + " clicked " + event.getItem().getItemStack().toString());
+		
+		for (Map<?, ?> command : locationConfiguration.getMapList(event.getItem().getLocation(), ".commands")) {
+			if (command != null) {
+				//TODO: check all options from the Map<?, ?> command and replace all placeholders
+				Object permission = command.get("permission");
+				
+				if (permission instanceof String && event.getPlayer().hasPermission((String) permission) || !(permission instanceof String)) {
+					Object commandLine = command.get("command");
+					
+					if (commandLine instanceof String) {
+						CommandSender commandSender = "player".equals(command.get("sender")) ? event.getPlayer() : getServer().getConsoleSender();
+						
+						getServer().dispatchCommand(commandSender, ((String) commandLine).replace("<player>", event.getPlayer().getName()).replace("<type>", event.getItem().getItemStack().getType().toString()));
+					}
+				}
+			}
 		}
 	}
 }
