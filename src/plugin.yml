@@ -1,0 +1,10 @@
+name: ClickableItems
+main: com.vanillage.clickableitems.ClickableItems
+version: 1.0
+softdepend: [WorldGuard]
+commands:
+  clickableitems:
+    description: All commands for ClickableItems
+    usage: '§cUsage: /clickableitems reload'
+    permission: clickableitems.clickableitems
+    permission-message: §cYou don't have permissions.

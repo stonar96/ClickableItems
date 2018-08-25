@@ -1,0 +1,94 @@
+# example config
+# 
+# clickable-items:
+#   everywhere:                                                 everywhere, default
+#     RIGHT_CLICK_AIR:
+#       enable-player-location: true
+#       enable-item-location: true
+#       search-range: 5.0
+#       offset: 0.3
+#       accuracy: 0.98
+#     RIGHT_CLICK_BLOCK:
+#       enable-player-location: true
+#       enable-item-location: true
+#       search-range: 5.0
+#       offset: 0.3
+#       accuracy: 0.98
+#     LEFT_CLICK_AIR:
+#       enable-player-location: false
+#       enable-item-location: false
+#       search-range: 5.0
+#       offset: 0.3
+#       accuracy: 0.98
+#     LEFT_CLICK_BLOCK:
+#       enable-player-location: false
+#       enable-item-location: false
+#       search-range: 5.0
+#       offset: 0.3
+#       accuracy: 0.98
+#   worlds:														overwrites everywhere
+#     world_nether:
+#       RIGHT_CLICK_AIR:
+#         enable-player-location: false
+#       RIGHT_CLICK_BLOCK:
+#         enable-player-location: false
+#     world_the_end:
+#       RIGHT_CLICK_AIR:
+#         search-range: 10.0
+#       RIGHT_CLICK_BLOCK:
+#         search-range: 10.0
+#   regions:                                                    overwrites worlds (if regions overlap -> higher priority overwrites, if priorities equal -> false overwrites)
+#     world;exampleRegion:
+#       LEFT_CLICK_AIR:
+#         enable-player-location: true
+#         enable-item-location: true
+#       LEFT_CLICK_BLOCK:
+#         enable-player-location: true
+#         enable-item-location: true
+#   chunks:                                   	               overwrites regions
+#     world;0;0:
+#       LEFT_CLICK_AIR:
+#         enable-player-location: true
+#         enable-item-location: true
+#       LEFT_CLICK_BLOCK:
+#         enable-player-location: true
+#         enable-item-location: true
+#   locations:                                                  overwrites chunks
+#     world;10;60;20:											whole block
+#       RIGHT_CLICK_AIR:
+#         enable-item-location: false
+#       RIGHT_CLICK_BLOCK:
+#         enable-item-location: false
+#     world;10.5;60.5;20.5:										exact location overwrites block location
+#       RIGHT_CLICK_AIR:
+#         enable-item-location: true
+#       RIGHT_CLICK_BLOCK:
+#         enable-item-location: true
+#
+
+clickable-items:
+  everywhere:
+    RIGHT_CLICK_AIR:
+      enable-player-location: true
+      enable-item-location: true
+      search-range: 5.0
+      offset: 0.3
+      accuracy: 0.98
+    RIGHT_CLICK_BLOCK:
+      enable-player-location: true
+      enable-item-location: true
+      search-range: 5.0
+      offset: 0.3
+      accuracy: 0.98
+    LEFT_CLICK_AIR:
+      enable-player-location: false
+      enable-item-location: false
+      search-range: 5.0
+      offset: 0.3
+      accuracy: 0.98
+    LEFT_CLICK_BLOCK:
+      enable-player-location: false
+      enable-item-location: false
+      search-range: 5.0
+      offset: 0.3
+      accuracy: 0.98
