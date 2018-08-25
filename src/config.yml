@@ -2,8 +2,8 @@
 # 
 # clickable-items:
 #   everywhere:                                                 everywhere, default
-#     commands:
-#     - command: 'say <player> clicked item <type>'
+#     commands:                                                 further command options: type, action (more coming soon)
+#     - command: 'say <player> clicked item <type>'             more placeholders coming soon
 #       permission: 'clickableitems.saywhoclickedwhat'
 #     - command: 'me clicked item <type>'
 #       permission: 'clickableitems.saywhoclickedwhat'
@@ -33,7 +33,7 @@
 #       search-range: 5.0
 #       offset: 0.3
 #       accuracy: 0.98
-#   worlds:														overwrites everywhere
+#   worlds:                                                     overwrites everywhere
 #     world_nether:
 #       RIGHT_CLICK_AIR:
 #         enable-player-location: false
@@ -52,7 +52,7 @@
 #       LEFT_CLICK_BLOCK:
 #         enable-player-location: true
 #         enable-item-location: true
-#   chunks:                                   	               overwrites regions
+#   chunks:                                   	                overwrites regions
 #     world;0;0:
 #       LEFT_CLICK_AIR:
 #         enable-player-location: true
@@ -61,12 +61,12 @@
 #         enable-player-location: true
 #         enable-item-location: true
 #   locations:                                                  overwrites chunks
-#     world;10;60;20:											whole block
+#     world;10;60;20:                                           whole block
 #       RIGHT_CLICK_AIR:
 #         enable-item-location: false
 #       RIGHT_CLICK_BLOCK:
 #         enable-item-location: false
-#     world;10.5;60.5;20.5:										exact location overwrites block location
+#     world;10.5;60.5;20.5:                                     exact location overwrites block location
 #       RIGHT_CLICK_AIR:
 #         enable-item-location: true
 #       RIGHT_CLICK_BLOCK:

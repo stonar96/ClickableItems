@@ -3,6 +3,7 @@ package com.vanillage.clickableitems;
 import java.util.Map;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -109,15 +110,23 @@ public class ClickableItems extends JavaPlugin implements Listener {
 		for (Map<?, ?> command : locationConfiguration.getMapList(event.getItem().getLocation(), ".commands")) {
 			if (command != null) {
 				//TODO: check all options from the Map<?, ?> command and replace all placeholders
-				Object permission = command.get("permission");
+				//TODO: try and catch for valueOf
+				Object action = command.get("action");
 				
-				if (permission instanceof String && event.getPlayer().hasPermission((String) permission) || !(permission instanceof String)) {
-					Object commandLine = command.get("command");
+				if (action instanceof String && event.getEvent().getAction() == Action.valueOf((String) action) || !(action instanceof String)) {
+					Object type = command.get("type");
 					
-					if (commandLine instanceof String) {
-						CommandSender commandSender = "player".equals(command.get("sender")) ? event.getPlayer() : getServer().getConsoleSender();
+					if (type instanceof String && event.getItem().getItemStack().getType().equals(Material.valueOf((String) type)) || !(type instanceof String)) {
+						Object permission = command.get("permission");
 						
-						getServer().dispatchCommand(commandSender, ((String) commandLine).replace("<player>", event.getPlayer().getName()).replace("<type>", event.getItem().getItemStack().getType().toString()));
+						if (permission instanceof String && event.getPlayer().hasPermission((String) permission) || !(permission instanceof String)) {
+							Object commandLine = command.get("command");
+							
+							if (commandLine instanceof String) {
+								CommandSender commandSender = "player".equals(command.get("sender")) ? event.getPlayer() : getServer().getConsoleSender();
+								getServer().dispatchCommand(commandSender, ((String) commandLine).replace("<player>", event.getPlayer().getName()).replace("<type>", event.getItem().getItemStack().getType().toString()));
+							}
+						}
 					}
 				}
 			}
