@@ -5,10 +5,13 @@
 #     commands:                                                 further command options: type, action (more coming soon)
 #     - command: 'say <player> clicked item <type>'             more placeholders coming soon
 #       permission: 'clickableitems.saywhoclickedwhat'
+#       hand: HAND
 #     - command: 'me clicked item <type>'
 #       permission: 'clickableitems.saywhoclickedwhat'
 #       sender: player
+#       hand: HAND
 #     - command: 'msg <player> You clicked item <type>'
+#       hand: OFF_HAND
 #     RIGHT_CLICK_AIR:
 #       enable-player-location: true
 #       enable-item-location: true
@@ -78,10 +81,13 @@ clickable-items:
     commands:
     - command: 'say <player> clicked item <type>'
       permission: 'clickableitems.saywhoclickedwhat'
+      hand: HAND
     - command: 'me clicked item <type>'
       permission: 'clickableitems.saywhoclickedwhat'
       sender: player
+      hand: HAND
     - command: 'msg <player> You clicked item <type>'
+      hand: OFF_HAND
     RIGHT_CLICK_AIR:
       enable-player-location: true
       enable-item-location: true
