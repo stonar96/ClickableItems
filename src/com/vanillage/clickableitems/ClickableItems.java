@@ -106,12 +106,9 @@ public class ClickableItems extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerClickItem(PlayerClickItemEvent event) {
-        getLogger().info(event.getPlayer().getName() + " clicked " + event.getItem().getItemStack().toString());
-
         for (Map<?, ?> command : locationConfiguration.getMapList(event.getItem().getLocation(), ".commands")) {
             if (command != null) {
                 // TODO: check all options from the Map<?, ?> command and replace all placeholders
-                // TODO: add HAND option
                 // TODO: try and catch for valueOf
                 Object action = command.get("action");
 
